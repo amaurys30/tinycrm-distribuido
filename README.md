@@ -113,7 +113,7 @@ La **Red Interna** se crea con `--internal`, por lo que no tiene salida a Intern
 
 ### En los dos portátiles
 ```powershell
-git clone https://github.com/<usuario>/<repositorio>.git C:\sd\tinycrm-distribuido
+git clone https://github.com/amaurys30/tinycrm-distribuido.git
 cd C:\sd\tinycrm-distribuido
 ```
 
