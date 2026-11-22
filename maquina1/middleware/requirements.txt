@@ -1,0 +1,5 @@
+aiohttp==3.10.10
+aiomysql==0.2.0
+PyMySQL==1.1.1
+# MySQL 8 usa caching_sha2_password: aiomysql/PyMySQL necesitan cryptography
+cryptography==43.0.3

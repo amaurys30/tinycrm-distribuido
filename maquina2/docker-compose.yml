@@ -1,0 +1,55 @@
+# =====================================================================
+#  MAQUINA 2  (portatil 2)  -  Red Externa
+#  Los "Actores" del diagrama (usuarios del Cliente A y del Cliente B).
+#  Su DNS es el del portatil 1 (IP_MAQUINA1, puerto 53):
+#  www.tiny.com -> IP del portatil 1 -> puerto 80 -> Firewall
+# =====================================================================
+name: tiny-maquina2
+
+x-actor-navegador: &actor-navegador
+  image: jlesage/firefox:latest
+  restart: unless-stopped
+  shm_size: 1gb
+  mem_limit: 1500m
+  dns: ["${IP_MAQUINA1}"]
+  environment:
+    TZ: America/Bogota
+    KEEP_APP_RUNNING: "1"
+    FF_OPEN_URL: http://www.tiny.com
+    DISPLAY_WIDTH: "1600"
+    DISPLAY_HEIGHT: "900"
+
+services:
+
+  # Actor de linea de comandos (curl) con los scripts de prueba
+  actor-cli:
+    build: ../cliente
+    image: tiny-cliente:1.0
+    container_name: actor-cli
+    hostname: actor-cli
+    restart: unless-stopped
+    dns: ["${IP_MAQUINA1}"]
+    networks:
+      red_externa: { ipv4_address: 192.168.0.20 }
+
+  # Actor del Cliente A: navegador en http://localhost:5800
+  actor-cliente-a:
+    <<: *actor-navegador
+    container_name: actor-cliente-a
+    hostname: actor-cliente-a
+    ports: ["5800:5800"]
+    networks:
+      red_externa: { ipv4_address: 192.168.0.10 }
+
+  # Actor del Cliente B: navegador en http://localhost:5801
+  actor-cliente-b:
+    <<: *actor-navegador
+    container_name: actor-cliente-b
+    hostname: actor-cliente-b
+    ports: ["5801:5800"]
+    networks:
+      red_externa: { ipv4_address: 192.168.0.11 }
+
+networks:
+  red_externa:
+    external: true

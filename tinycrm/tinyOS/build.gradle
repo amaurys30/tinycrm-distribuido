@@ -1,0 +1,36 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// [SD] Health checks para los balanceadores (HAProxy -> /actuator/health)
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	// [SD] Sesiones HTTP compartidas en la BD: si una instancia cae, la otra conserva la sesion
+	implementation 'org.springframework.session:spring-session-jdbc'
+	// [SD] Publicacion de eventos de usuarios al broker (RabbitMQ)
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	runtimeOnly 'mysql:mysql-connector-java'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+// [SD] Solo generamos el jar ejecutable (evita el *-plain.jar)
+jar {
+	enabled = false
+}
+
+test {
+	useJUnitPlatform()
+	enabled = false
+}

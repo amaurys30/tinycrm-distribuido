@@ -1,0 +1,4 @@
+# Los scripts y configuraciones se ejecutan dentro de contenedores Linux:
+# deben conservar finales de linea LF aunque se clonen en Windows.
+* text=auto eol=lf
+*.ps1 text eol=crlf

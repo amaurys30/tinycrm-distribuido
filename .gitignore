@@ -1,0 +1,35 @@
+# ---------------------------------------------------------------
+# Secretos: NUNCA se suben (cada equipo crea los suyos)
+# ---------------------------------------------------------------
+.env
+**/.env
+!**/.env.example
+certificados/*.key
+certificados/*.crt
+certificados/*.srl
+certificados/*.csr
+
+# ---------------------------------------------------------------
+# Compilados y dependencias de TinyCRM
+# ---------------------------------------------------------------
+node_modules/
+**/dist/
+**/build/
+**/.gradle/
+*.jar
+*.class
+
+# Python
+__pycache__/
+*.pyc
+
+# ---------------------------------------------------------------
+# Editores y sistema operativo
+# ---------------------------------------------------------------
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

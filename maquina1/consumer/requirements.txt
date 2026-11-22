@@ -1,0 +1,4 @@
+pika==1.3.2
+PyMySQL==1.1.1
+# MySQL 8 usa caching_sha2_password: PyMySQL necesita cryptography para autenticarse
+cryptography==43.0.3
